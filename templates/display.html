@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>Steam news</title>
+    <style>
+    body { 
+        font-family:"Motiva Sans Light", "Motiva Sans", arial, tahoma, sans-serif;
+        font-size:100%;
+        background-color: #1B2838;
+    }
+    a:link {
+        color: #799905;
+        text-decoration: none;
+    }
+    a:visited {
+        color: #799905;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #D2E885;
+        text-decoration: none;
+    }
+    .parent {
+        margin: 0.1em 0;
+        padding: 0 0 0 40px;
+    }
+    .parent > li {
+        margin: 5px 0;
+        background-color: rgba( 0, 0, 0, 0.2 );
+    }
+    ul {
+        margin: 5px 0;
+        padding: 0 0 0 10px;
+    }
+    li {
+        margin: 5px 0;
+        color: #9099A1;
+        font-size:13px;
+        list-style-type: none;
+    }
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    td {
+        padding: 3px 3px 0 3px;
+        vertical-align: top;
+    }
+    </style>
+</head>
+<body>
+  <ul class="parent">
+  {% for item in data %}
+    <li>
+        <table><tr><td><img src="{{ item['icon_url'] }}" style="border:1px solid black"></td>
+        <td>
+            <b><span style="color:#67C1F5">{{ item['name'] }}</span></b> - <span style="color:#FFFFFF">{{ item['title'] }}</span> - [{{ item['date'] }}] - (<a href="{{ item['url'] }}">Link</a>)
+            <ul>
+                <li>{{ item['content']|safe }}</li>
+            </ul>
+        </td>
+        </table>
+    </li>
+  {% endfor %}
+  </ul>
+</body>
+</html>
