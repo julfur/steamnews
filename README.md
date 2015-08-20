@@ -12,6 +12,11 @@ pip install -r requirements.txt
 ```
 
 You need to modify steamnews.py to specify your Steam API key and your Steam ID in order to query your owned game list.
+
+https://steamcommunity.com/dev/apikey
+
+You can get your Steam ID from any website offering this service (must feed your steam profile URL)
+
 Look for 'API_KEY' and 'STEAM_ID' variables.
 
 Run it once manually to generate the JSON file.
