@@ -28,7 +28,6 @@ python steamnews.py
 data.json file should be generated.
 
 You can now run the webapp.py (Flask app) to enjoy your dirty steam news dashboard.
-
 Run it in background or use gunicorn coupled with any webserver.
 
 ```
