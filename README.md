@@ -35,6 +35,5 @@ python webapp.py
 ```
 
 It is suggested to create a cronjob for the steamnews.py script.
-
 Running it twice a day is clearly enough to get an overview or what's new amongst your games.
 
