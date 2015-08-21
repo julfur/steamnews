@@ -12,20 +12,16 @@ pip install -r requirements.txt
 ```
 
 You need to modify steamnews.py to specify your Steam API key and your Steam ID in order to query your owned game list.
+Look for 'API_KEY' and 'STEAM_ID' variables in the script.
 
+You can get your Steam ID from any website offering this service (must feed your steam profile URL) and your Steam API key at this URL:
 https://steamcommunity.com/dev/apikey
 
-You can get your Steam ID from any website offering this service (must feed your steam profile URL)
-
-Look for 'API_KEY' and 'STEAM_ID' variables.
-
-Run it once manually to generate the JSON file.
+Run it once manually to generate the JSON file (data.json):
 
 ```
 python steamnews.py
 ```
-
-data.json file should be generated.
 
 You can now run the webapp.py (Flask app) to enjoy your dirty steam news dashboard.
 Run it in background or use gunicorn coupled with any webserver.
