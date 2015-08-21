@@ -16,13 +16,14 @@ class Steam():
     def __init__(self, key, steamid):
         self.key = key
         self.steamid = steamid
+        self.now = datetime.datetime.now()
 
     def request(self, url):
         try:
             response = requests.get(url)
             return response.json()
         except requests.exceptions.RequestException as e:
-            print datetime.datetime.now(), e
+            print self.now, e
             sys.exit(1)
 
     def get_owned_game(self):
@@ -52,15 +53,11 @@ class Steam():
             Sort by ascending date.
             Takes your owned games list as a parameter.
         """
-        data = []
-        appid = []
-        metadata = []
-        news = []
-        now = datetime.datetime.now()
-        # Keeping name and icon_url 
         # Building appid list to feed Pool
+        appid = [game['appid'] for game in game_list['response']['games']]
+        # Keeping name and icon_url from owned game list
+        metadata = []
         for game in game_list['response']['games']:
-            appid.append(game['appid'])
             icon_url = ("http://media.steampowered.com/steamcommunity/"
                         "public/images/apps/" + str(game['appid']) + "/" +
                         str(game['img_logo_url']) + ".jpg")
@@ -68,20 +65,22 @@ class Steam():
                              'appid' : game['appid'],
                              'icon_url' : icon_url})
         # Multiprocessing
+        news = []
         pool = ThreadPool(8)
         results = pool.map_async(self.get_news, appid, callback=news.extend)
         results.wait()
         pool.close()
         pool.join()
         # Building output
+        data = []
         for x,y in zip(news, metadata):
             if x['appnews']['appid'] == y['appid']:
                 name = y['name']
                 icon_url = y['icon_url']
-                news = x['appnews']['newsitems']
-                for z in news:
+                content = x['appnews']['newsitems']
+                for z in content:
                     news_date = datetime.datetime.fromtimestamp(int(z['date']))
-                    if now - news_date < datetime.timedelta(weeks=4):
+                    if self.now - news_date < datetime.timedelta(weeks=4):
                         data.append({'title': z['title'],
                                      'date': news_date.strftime('%Y-%m-%d'),
                                      'name': name,
