@@ -70,6 +70,7 @@ class Steam():
         # Multiprocessing
         pool = ThreadPool(8)
         results = pool.map_async(self.get_news, appid, callback=news.extend)
+        results.wait()
         pool.close()
         pool.join()
         # Building output
