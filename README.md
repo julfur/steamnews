@@ -1,5 +1,5 @@
 # Steamnews
-Steamnews provides a quick overview of the last steam news for each game in your library for the past 4 weeks.
+Python Flask App to provide a quick overview of the last steam news for each game in your library for the past 4 weeks.
 Pretty usefull to easily spot which game has been or will be updated if you dont have auto-update enabled.
 Quick and dirty replacement for the clunky steam news interface.
 
